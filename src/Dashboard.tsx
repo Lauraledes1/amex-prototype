@@ -162,7 +162,7 @@ function Sidebar({ active, open, onClose }: { active: string; open: boolean; onC
       {/* Mobile overlay */}
       {open && <div className="fixed inset-0 bg-black/40 z-10 lg:hidden" onClick={onClose} />}
 
-      <aside className={`fixed lg:relative z-20 top-0 left-0 h-full w-[280px] lg:w-[315px] shrink-0 bg-surface-container-lowest border-r border-border-subtle flex flex-col transition-transform duration-300 ${open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+      <aside className={`fixed lg:sticky lg:top-0 lg:h-screen z-20 top-0 left-0 h-full w-[280px] lg:w-[315px] shrink-0 bg-surface-container-lowest border-r border-border-subtle flex flex-col transition-transform duration-300 ${open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
         <div className="h-[100px] flex items-center justify-center border-b border-border-subtle">
           <img src={A.logo} alt="American Express" className="w-[70px] h-[70px] object-contain" />
         </div>
@@ -322,11 +322,11 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-screen bg-surface-default font-sans overflow-hidden">
+    <div className="flex min-h-screen bg-surface-default font-sans">
       <Sidebar active="Dashboard" open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      <div className="flex flex-col flex-1 overflow-hidden min-w-0">
-        <header className="flex items-center justify-between lg:justify-end px-6 lg:px-10 py-4 lg:py-6 bg-surface-container-lowest border-b border-border-subtle shrink-0">
+      <div className="flex flex-col flex-1 min-w-0">
+        <header className="sticky top-0 z-10 flex items-center justify-between lg:justify-end px-6 lg:px-10 py-4 lg:py-6 bg-surface-container-lowest border-b border-border-subtle shrink-0">
           {/* Hamburger — mobile only */}
           <button className="lg:hidden p-2 rounded-s hover:bg-surface-state-low" onClick={() => setSidebarOpen(true)}>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -343,7 +343,7 @@ export default function Dashboard() {
           </a>
         </header>
 
-        <main className="flex-1 overflow-auto p-4 lg:p-10 flex flex-col gap-4 lg:gap-6">
+        <main className="flex-1 p-4 lg:p-10 flex flex-col gap-4 lg:gap-6">
           <div className="bg-surface-container-lowest rounded-m border border-border-subtle p-4 lg:p-6 flex flex-col gap-4 lg:gap-6">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <h1 className="text-title-sm lg:text-title-lg font-semibold text-content-default">Dashboard</h1>
