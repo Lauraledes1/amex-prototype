@@ -282,12 +282,12 @@ function PendingPaymentsTable() {
           See More
         </button>
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto pt-6 pb-6">
         <table className="w-full min-w-[900px]">
           <thead>
             <tr className="border-b border-border-default">
               {COLUMNS.map(col => (
-                <th key={col} className="text-left text-body-md font-medium text-content-default pl-6 pr-3 py-2 whitespace-nowrap">
+                <th key={col} className="text-left text-body-md font-medium text-content-default pl-6 pr-3 h-[80px] whitespace-nowrap">
                   <span className="flex items-center gap-[10px]">{col}<IconSort /></span>
                 </th>
               ))}
@@ -309,7 +309,7 @@ function PendingPaymentsTable() {
           </tbody>
         </table>
       </div>
-      <div className="px-6 py-4 border-t border-border-subtle">
+      <div className="px-6 h-16 flex items-center border-t border-border-subtle">
         <span className="text-body-sm text-content-subtle">Showing 5 of 50 Pending Payments</span>
       </div>
     </div>
