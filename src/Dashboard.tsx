@@ -2,41 +2,41 @@ import { useState } from 'react';
 
 // ── Asset paths (served from /public/assets/) ─────────────────────────────────
 const A = {
-  logo:         '/assets/logo.png',
-  dashA:        '/assets/icon-dash-1.png',
-  dashB:        '/assets/icon-dash-2.png',
-  payA:         '/assets/icon-pay-1.png',
-  payB:         '/assets/icon-pay-2.png',
-  payC:         '/assets/icon-pay-3.png',
-  payersA:      '/assets/icon-payers-1.png',
-  payersB:      '/assets/icon-payers-2.png',
-  payersC:      '/assets/icon-payers-3.png',
-  payersD:      '/assets/icon-payers-4.png',
-  settingsA:    '/assets/icon-settings-1.png',
-  settingsB:    '/assets/icon-settings-2.png',
-  helpA:        '/assets/icon-help-1.png',
-  helpB:        '/assets/icon-help-2.png',
-  helpC:        '/assets/icon-help-3.png',
-  paidA:        '/assets/icon-kpi-paid-1.png',
-  paidB:        '/assets/icon-kpi-paid-2.png',
-  paidC:        '/assets/icon-kpi-paid-3.png',
-  pendingA:     '/assets/icon-kpi-pend-1.png',
-  pendingB:     '/assets/icon-kpi-pend-2.png',
-  pendingC:     '/assets/icon-kpi-pend-3.png',
-  pendingD:     '/assets/icon-kpi-pend-4.png',
-  declinedA:    '/assets/icon-kpi-decl-1.png',
-  declinedB:    '/assets/icon-kpi-decl-2.png',
-  rejectedA:    '/assets/icon-kpi-rej-1.png',
-  rejectedB:    '/assets/icon-kpi-rej-2.png',
-  rejectedC:    '/assets/icon-kpi-rej-3.png',
-  sortA:        '/assets/icon-sort-1.png',
-  sortB:        '/assets/icon-sort-2.png',
-  sortC:        '/assets/icon-sort-3.png',
-  sortD:        '/assets/icon-sort-4.png',
-  eyeA:         '/assets/icon-eye-1.png',
-  eyeB:         '/assets/icon-eye-2.png',
-  linkA:        '/assets/icon-link-1.png',
-  linkB:        '/assets/icon-link-2.png',
+  logo:         '/assets/logo.svg',
+  dashA:        '/assets/icon-dash-1.svg',
+  dashB:        '/assets/icon-dash-2.svg',
+  payA:         '/assets/icon-pay-1.svg',
+  payB:         '/assets/icon-pay-2.svg',
+  payC:         '/assets/icon-pay-3.svg',
+  payersA:      '/assets/icon-payers-1.svg',
+  payersB:      '/assets/icon-payers-2.svg',
+  payersC:      '/assets/icon-payers-3.svg',
+  payersD:      '/assets/icon-payers-4.svg',
+  settingsA:    '/assets/icon-settings-1.svg',
+  settingsB:    '/assets/icon-settings-2.svg',
+  helpA:        '/assets/icon-help-1.svg',
+  helpB:        '/assets/icon-help-2.svg',
+  helpC:        '/assets/icon-help-3.svg',
+  paidA:        '/assets/icon-kpi-paid-1.svg',
+  paidB:        '/assets/icon-kpi-paid-2.svg',
+  paidC:        '/assets/icon-kpi-paid-3.svg',
+  pendingA:     '/assets/icon-kpi-pend-1.svg',
+  pendingB:     '/assets/icon-kpi-pend-2.svg',
+  pendingC:     '/assets/icon-kpi-pend-3.svg',
+  pendingD:     '/assets/icon-kpi-pend-4.svg',
+  declinedA:    '/assets/icon-kpi-decl-1.svg',
+  declinedB:    '/assets/icon-kpi-decl-2.svg',
+  rejectedA:    '/assets/icon-kpi-rej-1.svg',
+  rejectedB:    '/assets/icon-kpi-rej-2.svg',
+  rejectedC:    '/assets/icon-kpi-rej-3.svg',
+  sortA:        '/assets/icon-sort-1.svg',
+  sortB:        '/assets/icon-sort-2.svg',
+  sortC:        '/assets/icon-sort-3.svg',
+  sortD:        '/assets/icon-sort-4.svg',
+  eyeA:         '/assets/icon-eye-1.svg',
+  eyeB:         '/assets/icon-eye-2.svg',
+  linkA:        '/assets/icon-link-1.svg',
+  linkB:        '/assets/icon-link-2.svg',
 };
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
@@ -156,28 +156,33 @@ const NAV_ITEMS = [
   { label: 'Help',      icon: IconHelp      },
 ];
 
-function Sidebar({ active }: { active: string }) {
+function Sidebar({ active, open, onClose }: { active: string; open: boolean; onClose: () => void }) {
   return (
-    <aside className="w-[315px] shrink-0 bg-surface-container-lowest border-r border-border-subtle flex flex-col h-screen">
-      <div className="h-[100px] flex items-center justify-center border-b border-border-subtle">
-        <img src={A.logo} alt="American Express" className="w-[70px] h-[70px] object-contain" />
-      </div>
-      <nav className="flex flex-col gap-4 px-8 pt-8 flex-1">
-        {NAV_ITEMS.map(({ label, icon: Icon }) => {
-          const isActive = label === active;
-          return (
-            <a key={label} href="#" className={`flex items-center gap-3 pl-3 pr-4 py-3 rounded-s text-body-md font-medium transition-colors ${isActive ? 'border border-brand-primary text-brand-primary-text' : 'text-content-default hover:bg-surface-state-low'}`}>
-              <Icon />
-              {label}
-            </a>
-          );
-        })}
-      </nav>
-      <div className="px-8 py-8 border-t border-border-subtle">
-        <p className="text-caption-md text-content-subtle">Boost v0.1</p>
-        <a href="#" className="text-caption-md text-content-subtle hover:underline">Privacy Policy</a>
-      </div>
-    </aside>
+    <>
+      {/* Mobile overlay */}
+      {open && <div className="fixed inset-0 bg-black/40 z-10 lg:hidden" onClick={onClose} />}
+
+      <aside className={`fixed lg:relative z-20 top-0 left-0 h-full w-[280px] lg:w-[315px] shrink-0 bg-surface-container-lowest border-r border-border-subtle flex flex-col transition-transform duration-300 ${open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+        <div className="h-[100px] flex items-center justify-center border-b border-border-subtle">
+          <img src={A.logo} alt="American Express" className="w-[70px] h-[70px] object-contain" />
+        </div>
+        <nav className="flex flex-col gap-4 px-8 pt-8 flex-1">
+          {NAV_ITEMS.map(({ label, icon: Icon }) => {
+            const isActive = label === active;
+            return (
+              <a key={label} href="#" onClick={onClose} className={`flex items-center gap-3 pl-3 pr-4 py-3 rounded-s text-body-md font-medium transition-colors ${isActive ? 'border border-brand-primary text-brand-primary-text' : 'text-content-default hover:bg-surface-state-low'}`}>
+                <Icon />
+                {label}
+              </a>
+            );
+          })}
+        </nav>
+        <div className="px-8 py-8 border-t border-border-subtle">
+          <p className="text-caption-md text-content-subtle">Boost v0.1</p>
+          <a href="#" className="text-caption-md text-content-subtle hover:underline">Privacy Policy</a>
+        </div>
+      </aside>
+    </>
   );
 }
 
@@ -272,36 +277,38 @@ function PendingPaymentsTable() {
   return (
     <div className="bg-surface-container-lowest rounded-m border border-border-subtle overflow-hidden">
       <div className="flex items-center justify-between px-6 py-6">
-        <h2 className="text-title-lg font-semibold text-content-default">Pending Payments</h2>
-        <button className="bg-brand-primary text-content-knockout text-body-md font-medium px-4 py-2 h-[40px] rounded-sm hover:opacity-90 transition-opacity">
+        <h2 className="text-title-sm lg:text-title-lg font-semibold text-content-default">Pending Payments</h2>
+        <button className="bg-brand-primary text-content-knockout text-body-sm lg:text-body-md font-medium px-3 lg:px-4 py-2 h-[40px] rounded-sm hover:opacity-90 transition-opacity whitespace-nowrap">
           See More
         </button>
       </div>
-      <table className="w-full">
-        <thead>
-          <tr className="border-b border-border-default">
-            {COLUMNS.map(col => (
-              <th key={col} className="text-left text-body-md font-medium text-content-default pl-6 pr-3 py-2 whitespace-nowrap">
-                <span className="flex items-center gap-[10px]">{col}<IconSort /></span>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {PAYMENTS.map((p, i) => (
-            <tr key={i} className="border-b border-border-subtle last:border-b-0 hover:bg-surface-state-low transition-colors">
-              <td className="pl-6 pr-3 h-[80px]"><span className="flex items-center gap-[10px] text-body-sm text-content-default whitespace-nowrap">{p.id}<IconEye /></span></td>
-              <td className="px-3 h-[80px] text-body-sm text-content-default whitespace-nowrap">{p.payerName}</td>
-              <td className="px-[14px] h-[80px] text-body-sm text-content-default whitespace-nowrap">{p.invoiceAmount}</td>
-              <td className="px-3 h-[80px]"><InvoiceChip count={p.invoiceCount} /></td>
-              <td className="px-3 h-[80px]"><StatusBadge status={p.status} /></td>
-              <td className="px-3 h-[80px] text-body-sm text-content-default whitespace-nowrap">{p.invoiceReceived}</td>
-              <td className="px-3 h-[80px] text-body-sm text-content-default whitespace-nowrap">{p.invoiceDue}</td>
-              <td className="px-3 h-[80px] text-body-sm text-content-default whitespace-nowrap">{p.paymentProcessed}</td>
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[900px]">
+          <thead>
+            <tr className="border-b border-border-default">
+              {COLUMNS.map(col => (
+                <th key={col} className="text-left text-body-md font-medium text-content-default pl-6 pr-3 py-2 whitespace-nowrap">
+                  <span className="flex items-center gap-[10px]">{col}<IconSort /></span>
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {PAYMENTS.map((p, i) => (
+              <tr key={i} className="border-b border-border-subtle last:border-b-0 hover:bg-surface-state-low transition-colors">
+                <td className="pl-6 pr-3 h-[80px]"><span className="flex items-center gap-[10px] text-body-sm text-content-default whitespace-nowrap">{p.id}<IconEye /></span></td>
+                <td className="px-3 h-[80px] text-body-sm text-content-default whitespace-nowrap">{p.payerName}</td>
+                <td className="px-[14px] h-[80px] text-body-sm text-content-default whitespace-nowrap">{p.invoiceAmount}</td>
+                <td className="px-3 h-[80px]"><InvoiceChip count={p.invoiceCount} /></td>
+                <td className="px-3 h-[80px]"><StatusBadge status={p.status} /></td>
+                <td className="px-3 h-[80px] text-body-sm text-content-default whitespace-nowrap">{p.invoiceReceived}</td>
+                <td className="px-3 h-[80px] text-body-sm text-content-default whitespace-nowrap">{p.invoiceDue}</td>
+                <td className="px-3 h-[80px] text-body-sm text-content-default whitespace-nowrap">{p.paymentProcessed}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <div className="px-6 py-4 border-t border-border-subtle">
         <span className="text-body-sm text-content-subtle">Showing 5 of 50 Pending Payments</span>
       </div>
@@ -312,13 +319,22 @@ function PendingPaymentsTable() {
 // ── Dashboard Page ────────────────────────────────────────────────────────────
 export default function Dashboard() {
   const [timeRange, setTimeRange] = useState<TimeRange>('MTD');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-screen bg-surface-default font-sans">
-      <Sidebar active="Dashboard" />
+    <div className="flex h-screen bg-surface-default font-sans overflow-hidden">
+      <Sidebar active="Dashboard" open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      <div className="flex flex-col flex-1 overflow-hidden">
-        <header className="flex items-center justify-end px-10 py-6 bg-surface-container-lowest border-b border-border-subtle">
+      <div className="flex flex-col flex-1 overflow-hidden min-w-0">
+        <header className="flex items-center justify-between lg:justify-end px-6 lg:px-10 py-4 lg:py-6 bg-surface-container-lowest border-b border-border-subtle shrink-0">
+          {/* Hamburger — mobile only */}
+          <button className="lg:hidden p-2 rounded-s hover:bg-surface-state-low" onClick={() => setSidebarOpen(true)}>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect y="3" width="20" height="2" rx="1" fill="#101010"/>
+              <rect y="9" width="20" height="2" rx="1" fill="#101010"/>
+              <rect y="15" width="20" height="2" rx="1" fill="#101010"/>
+            </svg>
+          </button>
           <a className="flex items-center gap-3 cursor-pointer">
             <div className="w-[40px] h-[40px] rounded-s bg-brand-primary flex items-center justify-center shrink-0">
               <span className="text-content-knockout text-body-md font-medium">LL</span>
@@ -327,16 +343,16 @@ export default function Dashboard() {
           </a>
         </header>
 
-        <main className="flex-1 overflow-auto p-10 flex flex-col gap-6">
-          <div className="bg-surface-container-lowest rounded-m border border-border-subtle p-6 flex flex-col gap-6">
-            <div className="flex items-center justify-between">
-              <h1 className="text-title-lg font-semibold text-content-default">Dashboard</h1>
-              <div className="flex items-center gap-[64px]">
+        <main className="flex-1 overflow-auto p-4 lg:p-10 flex flex-col gap-4 lg:gap-6">
+          <div className="bg-surface-container-lowest rounded-m border border-border-subtle p-4 lg:p-6 flex flex-col gap-4 lg:gap-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <h1 className="text-title-sm lg:text-title-lg font-semibold text-content-default">Dashboard</h1>
+              <div className="flex flex-wrap items-center gap-4 lg:gap-[64px]">
                 <VolumeCountToggle />
                 <TimeRangeSelector value={timeRange} onChange={setTimeRange} />
               </div>
             </div>
-            <div className="flex gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
               {[
                 { label: 'Paid',     value: '$100,000', icon: IconKpiPaid     },
                 { label: 'Pending',  value: '$5,000',   icon: IconKpiPending  },
