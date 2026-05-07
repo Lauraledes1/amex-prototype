@@ -326,7 +326,7 @@ export default function Dashboard() {
       <Sidebar active="Dashboard" open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       <div className="flex flex-col flex-1 min-w-0">
-        <header className="sticky top-0 z-10 flex items-center justify-between lg:justify-end px-6 lg:px-10 py-4 lg:py-6 bg-surface-container-lowest border-b border-border-subtle shrink-0">
+        <header className="sticky top-0 z-10 flex items-center justify-between lg:justify-end px-6 lg:px-10 h-[100px] bg-surface-container-lowest border-b border-border-subtle shrink-0">
           {/* Hamburger — mobile only */}
           <button className="lg:hidden p-2 rounded-s hover:bg-surface-state-low" onClick={() => setSidebarOpen(true)}>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
